@@ -71,6 +71,45 @@
 
           <!-- Right Content (Astronaut Mascot holding star and Saturn) -->
           <div class="welcome-mascot-side">
+            <!-- Floating planets orbiting the astronaut -->
+            <!-- 1. Saturn -->
+            <div class="hero-planet-light p-saturn-light">
+              <svg viewBox="0 0 100 100" class="floating-slow">
+                <ellipse cx="50" cy="50" rx="42" ry="14" fill="none" stroke="#ffd700" stroke-width="6" transform="rotate(-15 50 50)" />
+                <ellipse cx="50" cy="50" rx="42" ry="14" fill="none" stroke="#f59e0b" stroke-width="3" transform="rotate(-15 50 50)" />
+                <circle cx="50" cy="50" r="22" fill="#ffd700" />
+                <path d="M 15 57 A 42 14 0 0 0 85 43" fill="none" stroke="#f59e0b" stroke-width="3" transform="rotate(-15 50 50)" />
+              </svg>
+            </div>
+
+            <!-- 2. Earth -->
+            <div class="hero-planet-light p-earth-light">
+              <svg viewBox="0 0 100 100" class="floating-slow">
+                <circle cx="50" cy="50" r="22" fill="#0ea5e9" />
+                <path d="M 36 38 Q 42 32 46 36 T 58 42 T 48 62 Z" fill="#10b981" />
+                <path d="M 54 58 Q 62 58 66 66 Z" fill="#10b981" />
+              </svg>
+            </div>
+
+            <!-- 3. Mars -->
+            <div class="hero-planet-light p-mars-light">
+              <svg viewBox="0 0 100 100" class="floating-slow">
+                <circle cx="50" cy="50" r="18" fill="#f97316" />
+                <circle cx="44" cy="46" r="3" fill="#ea580c" />
+                <circle cx="56" cy="56" r="4" fill="#ea580c" />
+              </svg>
+            </div>
+
+            <!-- 4. Jupiter -->
+            <div class="hero-planet-light p-jupiter-light">
+              <svg viewBox="0 0 100 100" class="floating-slow">
+                <circle cx="50" cy="50" r="25" fill="#f59e0b" />
+                <path d="M 27 42 Q 50 38 73 42" fill="none" stroke="#d97706" stroke-width="2.5" />
+                <path d="M 25 58 Q 50 62 75 58" fill="none" stroke="#d97706" stroke-width="3.5" />
+                <ellipse cx="64" cy="50" rx="5" ry="3.5" fill="#ef4444" />
+              </svg>
+            </div>
+
             <div class="astronaut-hero-wrapper">
               <svg viewBox="0 0 180 200" class="astronaut-hero-svg">
                 <!-- Waving Arm (Left) holding miniature Saturn -->
@@ -141,89 +180,47 @@
           </div>
         </div>
 
-        <!-- Space Scene with floating planets (behind / below welcome texts) -->
-        <div class="space-scene-light">
-          <!-- 1. Saturn -->
-          <div class="hero-planet-light p-saturn-light">
-            <svg viewBox="0 0 100 100" class="floating-slow">
-              <ellipse cx="50" cy="50" rx="42" ry="14" fill="none" stroke="#ffd700" stroke-width="6" transform="rotate(-15 50 50)" />
-              <ellipse cx="50" cy="50" rx="42" ry="14" fill="none" stroke="#f59e0b" stroke-width="3" transform="rotate(-15 50 50)" />
-              <circle cx="50" cy="50" r="22" fill="#ffd700" />
-              <!-- rings front -->
-              <path d="M 15 57 A 42 14 0 0 0 85 43" fill="none" stroke="#f59e0b" stroke-width="3" transform="rotate(-15 50 50)" />
-            </svg>
-          </div>
+      </div>
 
-          <!-- 2. Earth -->
-          <div class="hero-planet-light p-earth-light">
-            <svg viewBox="0 0 100 100" class="floating-slow">
-              <circle cx="50" cy="50" r="22" fill="#0ea5e9" />
-              <path d="M 36 38 Q 42 32 46 36 T 58 42 T 48 62 Z" fill="#10b981" />
-              <path d="M 54 58 Q 62 58 66 66 Z" fill="#10b981" />
-            </svg>
-          </div>
-
-          <!-- 3. Mars -->
-          <div class="hero-planet-light p-mars-light">
-            <svg viewBox="0 0 100 100" class="floating-slow">
-              <circle cx="50" cy="50" r="18" fill="#f97316" />
-              <circle cx="44" cy="46" r="3" fill="#ea580c" />
-              <circle cx="56" cy="56" r="4" fill="#ea580c" />
-            </svg>
-          </div>
-
-          <!-- 4. Jupiter -->
-          <div class="hero-planet-light p-jupiter-light">
-            <svg viewBox="0 0 100 100" class="floating-slow">
-              <circle cx="50" cy="50" r="25" fill="#f59e0b" />
-              <path d="M 27 42 Q 50 38 73 42" fill="none" stroke="#d97706" stroke-width="2.5" />
-              <path d="M 25 58 Q 50 62 75 58" fill="none" stroke="#d97706" stroke-width="3.5" />
-              <ellipse cx="64" cy="50" rx="5" ry="3.5" fill="#ef4444" />
-            </svg>
-          </div>
-        </div>
-
-        <!-- Fluffy illustrated cartoon clouds along bottom -->
-        <div class="clouds-border">
-          <svg viewBox="0 0 1200 120" class="clouds-svg" preserveAspectRatio="none">
-            <path d="M0 120 L1200 120 L1200 80 Q1150 50 1100 80 Q1050 110 1000 80 Q950 50 900 80 Q850 110 800 80 Q750 50 700 80 Q650 110 600 80 Q550 50 500 80 Q450 110 400 80 Q350 50 300 80 Q250 110 200 80 Q150 50 100 80 Q50 110 0 80 Z" fill="#ffffff"/>
+      <!-- Bobbing Rocket Ship placed under CTA & Clouds sitting on moon hills -->
+      <div class="rocket-scene-light">
+        <!-- Small orange Jupiter floating near rocket -->
+        <div class="floating-mini-jupiter">
+          <svg viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="16" fill="#f97316" />
+            <path d="M 15 26 Q 30 30 45 26" fill="none" stroke="#ea580c" stroke-width="2.5" />
+            <ellipse cx="38" cy="32" rx="3" ry="2" fill="#ef4444" />
           </svg>
         </div>
 
-        <!-- Bobbing Rocket Ship placed under CTA & Clouds sitting on moon hills -->
-        <div class="rocket-scene-light">
-          <!-- Small orange Jupiter floating near rocket -->
-          <div class="floating-mini-jupiter">
-            <svg viewBox="0 0 60 60">
-              <circle cx="30" cy="30" r="16" fill="#f97316" />
-              <path d="M 15 26 Q 30 30 45 26" fill="none" stroke="#ea580c" stroke-width="2.5" />
-              <ellipse cx="38" cy="32" rx="3" ry="2" fill="#ef4444" />
-            </svg>
-          </div>
-
-          <div class="rocket-wrapper-light">
-            <svg class="rocket-svg-light" viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
-              <!-- Flame -->
-              <g class="flame-group-light">
-                <path d="M 60 135 Q 45 160 60 178 Q 75 160 60 135 Z" fill="#f59e0b" />
-                <path d="M 60 138 Q 50 155 60 168 Q 70 155 60 138 Z" fill="#f97316" />
-              </g>
-              <!-- Rocket Body (Red) -->
-              <path d="M 60 20 C 35 62 35 118 35 135 L 85 135 C 85 118 85 62 60 20 Z" fill="#ef4444" />
-              <!-- Orange side details -->
-              <path d="M 37 100 Q 60 108 83 100 L 85 112 Q 60 122 35 112 Z" fill="#f97316" />
-              <!-- White Fins -->
-              <path d="M 35 110 C 20 120 10 142 12 145 C 22 145 35 135 35 125 Z" fill="#ffffff" />
-              <path d="M 85 110 C 100 120 110 142 108 145 C 98 145 85 135 85 125 Z" fill="#ffffff" />
-              <!-- Circular blue window -->
-              <circle cx="60" cy="72" r="16" fill="#f97316" />
-              <circle cx="60" cy="72" r="12" fill="#0ea5e9" />
-              <circle cx="60" cy="72" r="9" fill="#38bdf8" />
-              <path d="M 54 68 A 9 9 0 0 1 66 68 A 9 9 0 0 0 54 68 Z" fill="#ffffff" opacity="0.6" />
-            </svg>
-          </div>
+        <div class="rocket-wrapper-light">
+          <svg class="rocket-svg-light" viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Flame -->
+            <g class="flame-group-light">
+              <path d="M 60 135 Q 45 160 60 178 Q 75 160 60 135 Z" fill="#f59e0b" />
+              <path d="M 60 138 Q 50 155 60 168 Q 70 155 60 138 Z" fill="#f97316" />
+            </g>
+            <!-- Rocket Body (Red) -->
+            <path d="M 60 20 C 35 62 35 118 35 135 L 85 135 C 85 118 85 62 60 20 Z" fill="#ef4444" />
+            <!-- Orange side details -->
+            <path d="M 37 100 Q 60 108 83 100 L 85 112 Q 60 122 35 112 Z" fill="#f97316" />
+            <!-- White Fins -->
+            <path d="M 35 110 C 20 120 10 142 12 145 C 22 145 35 135 35 125 Z" fill="#ffffff" />
+            <path d="M 85 110 C 100 120 110 142 108 145 C 98 145 85 135 85 125 Z" fill="#ffffff" />
+            <!-- Circular blue window -->
+            <circle cx="60" cy="72" r="16" fill="#f97316" />
+            <circle cx="60" cy="72" r="12" fill="#0ea5e9" />
+            <circle cx="60" cy="72" r="9" fill="#38bdf8" />
+            <path d="M 54 68 A 9 9 0 0 1 66 68 A 9 9 0 0 0 54 68 Z" fill="#ffffff" opacity="0.6" />
+          </svg>
         </div>
+      </div>
 
+      <!-- Fluffy illustrated cartoon clouds along bottom -->
+      <div class="clouds-border">
+        <svg viewBox="0 0 1200 120" class="clouds-svg" preserveAspectRatio="none">
+          <path d="M0 120 L1200 120 L1200 80 Q1150 50 1100 80 Q1050 110 1000 80 Q950 50 900 80 Q850 110 800 80 Q750 50 700 80 Q650 110 600 80 Q550 50 500 80 Q450 110 400 80 Q350 50 300 80 Q250 110 200 80 Q150 50 100 80 Q50 110 0 80 Z" fill="#ffffff"/>
+        </svg>
       </div>
     </section>
 
