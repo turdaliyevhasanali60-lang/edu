@@ -157,27 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
     yupiter:  'images/jupiter.png',
     saturn:   'images/saturn.png',
     uran:     'images/uranus.jpg',
-    neptun:   null   // no real photo – uses decorative SVG fallback
+    neptun:   'images/neptune.png'
   };
-
-  const neptuneSVG = `<svg viewBox="0 0 100 100" class="modal-planet-svg" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="np-modal" cx="35%" cy="35%" r="65%">
-        <stop offset="0%" stop-color="#60a5fa"/>
-        <stop offset="40%" stop-color="#2563eb"/>
-        <stop offset="100%" stop-color="#1e3a8a"/>
-      </radialGradient>
-      <clipPath id="np-modal-clip"><circle cx="50" cy="50" r="48"/></clipPath>
-    </defs>
-    <circle cx="50" cy="50" r="48" fill="url(#np-modal)"/>
-    <g clip-path="url(#np-modal-clip)">
-      <path d="M 4 36 Q 25 28 50 32 Q 75 36 96 32" fill="none" stroke="#93c5fd" stroke-width="3.5" opacity="0.5"/>
-      <path d="M 4 50 Q 30 42 50 48 Q 70 54 96 48" fill="none" stroke="#60a5fa" stroke-width="5" opacity="0.4"/>
-      <path d="M 4 64 Q 30 58 50 62 Q 72 66 96 62" fill="none" stroke="#93c5fd" stroke-width="3" opacity="0.35"/>
-      <ellipse cx="65" cy="40" rx="12" ry="6" fill="#1d4ed8" opacity="0.6" transform="rotate(-8 65 40)"/>
-    </g>
-    <ellipse cx="35" cy="32" rx="14" ry="8" fill="white" opacity="0.07" transform="rotate(-20 35 32)"/>
-  </svg>`;
 
   const planetDetails = {
     merkuriy: {
@@ -267,12 +248,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const key = item.getAttribute('data-planet');
       const details = planetDetails[key];
       if (details) {
-        // Show real planet image (or SVG fallback for neptun)
+        // Show real planet image
         const imgSrc = planetImgSrc[key];
         if (imgSrc) {
           modalImgWrap.innerHTML = `<img src="${imgSrc}" alt="${details.title}" class="modal-planet-real-img">`;
-        } else {
-          modalImgWrap.innerHTML = neptuneSVG;
         }
 
         modalTitle.textContent = details.title;
@@ -313,24 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     yupiter:  `<img src="images/jupiter.png" alt="Yupiter"  class="drag-planet-real-img">`,
     saturn:   `<img src="images/saturn.png"  alt="Saturn"   class="drag-planet-real-img drag-planet-saturn">`,
     uran:     `<img src="images/uranus.jpg"  alt="Uran"     class="drag-planet-real-img">`,
-    neptun: `
-      <svg viewBox="0 0 100 100" class="drag-planet-real-img" style="border-radius:50%;" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="np-drag" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stop-color="#60a5fa"/>
-            <stop offset="40%" stop-color="#2563eb"/>
-            <stop offset="100%" stop-color="#1e3a8a"/>
-          </radialGradient>
-          <clipPath id="np-drag-clip"><circle cx="50" cy="50" r="48"/></clipPath>
-        </defs>
-        <circle cx="50" cy="50" r="48" fill="url(#np-drag)"/>
-        <g clip-path="url(#np-drag-clip)">
-          <path d="M 4 38 Q 25 30 50 34 Q 75 38 96 34" fill="none" stroke="#93c5fd" stroke-width="3" opacity="0.5"/>
-          <path d="M 4 52 Q 30 44 50 50 Q 70 56 96 50" fill="none" stroke="#60a5fa" stroke-width="4" opacity="0.4"/>
-          <ellipse cx="65" cy="40" rx="10" ry="5" fill="#1d4ed8" opacity="0.6" transform="rotate(-8 65 40)"/>
-        </g>
-      </svg>
-    `
+    neptun:   `<img src="images/neptune.png" alt="Neptun"   class="drag-planet-real-img">`
   };
 
   const initialPlanetsList = [
@@ -585,58 +547,63 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. QUIZ GAME ENGINE
   // ==========================================================================
   
-  // Custom framed mini solar system lineup illustration for the quiz questions
+  // Quiz illustrations — real planet photos for solar system / planet questions
   const quizSVGs = {
     q1: `
-      <svg viewBox="0 0 300 120" class="quiz-illus-svg">
-        <rect x="0" y="0" width="300" height="120" fill="#0f172a" rx="16"/>
-        <circle cx="10" cy="60" r="30" fill="#f59e0b" />
-        <circle cx="70" cy="60" r="5" fill="#94a3b8" />
-        <circle cx="95" cy="60" r="8" fill="#fef08a" />
-        <circle cx="125" cy="60" r="10" fill="#0ea5e9" />
-        <circle cx="155" cy="60" r="7" fill="#ef4444" />
-        <circle cx="190" cy="60" r="15" fill="#f59e0b" />
-        <ellipse cx="235" cy="60" rx="18" ry="5" fill="none" stroke="#fef08a" stroke-width="2" transform="rotate(-10 235 60)" />
-        <circle cx="235" cy="60" r="11" fill="#ffd700" />
-        <circle cx="270" cy="60" r="9" fill="#38bdf8" />
-        <line x1="10" y1="60" x2="300" y2="60" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" stroke-dasharray="3,3" />
-      </svg>
+      <div class="quiz-solar-lineup">
+        <div class="quiz-sun-icon">☀️</div>
+        <div class="quiz-planet-item"><img src="images/mercury.png" alt="Merkuriy" class="quiz-planet-img"><span>1</span></div>
+        <div class="quiz-planet-item"><img src="images/venus.png" alt="Venera" class="quiz-planet-img"><span>2</span></div>
+        <div class="quiz-planet-item"><img src="images/earth.png" alt="Yer" class="quiz-planet-img"><span>3</span></div>
+        <div class="quiz-planet-item"><img src="images/mars.png" alt="Mars" class="quiz-planet-img"><span>4</span></div>
+        <div class="quiz-planet-item quiz-planet-big"><img src="images/jupiter.png" alt="Yupiter" class="quiz-planet-img"><span>5</span></div>
+        <div class="quiz-planet-item quiz-planet-big"><img src="images/saturn.png" alt="Saturn" class="quiz-planet-img quiz-saturn-mini"><span>6</span></div>
+        <div class="quiz-planet-item"><img src="images/uranus.jpg" alt="Uran" class="quiz-planet-img"><span>7</span></div>
+        <div class="quiz-planet-item"><img src="images/neptune.png" alt="Neptun" class="quiz-planet-img"><span>8</span></div>
+      </div>
     `,
     q2: `
-      <svg viewBox="0 0 120 120" class="quiz-illus-svg" style="max-height:120px;">
-        <circle cx="60" cy="60" r="45" fill="#f59e0b" />
-        <path d="M 17 40 Q 60 32 103 40" fill="none" stroke="#b45309" stroke-width="4" />
-        <path d="M 15 60 Q 60 68 105 60" fill="none" stroke="#fef08a" stroke-width="3" />
-        <ellipse cx="78" cy="65" rx="8" ry="5" fill="#ef4444" />
-      </svg>
+      <div class="quiz-single-planet-wrap">
+        <img src="images/jupiter.png" alt="Yupiter" class="quiz-big-planet-img">
+        <div class="quiz-planet-badge">Yupiter — eng ulkan! 🏆</div>
+      </div>
     `,
     q3: `
-      <svg viewBox="0 0 120 120" class="quiz-illus-svg" style="max-height:120px; animation:rotatePlanet 30s linear infinite;">
-        <circle cx="60" cy="60" r="35" fill="rgba(124, 58, 237, 0.1)" />
-        <circle cx="60" cy="60" r="5" fill="#ffffff" filter="drop-shadow(0 0 5px #ffd700)" />
-        <path d="M 60 60 Q 75 50 85 30 T 70 10" fill="none" stroke="#ec4899" stroke-width="4" stroke-linecap="round" />
-        <path d="M 60 60 Q 45 70 35 90 T 50 110" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" />
+      <svg viewBox="0 0 160 120" class="quiz-illus-svg" style="max-height:130px;">
+        <rect x="0" y="0" width="160" height="120" rx="16" fill="#07060f"/>
+        <circle cx="80" cy="60" r="50" fill="rgba(124,58,237,0.07)"/>
+        <circle cx="80" cy="60" r="6" fill="#fffde7" filter="drop-shadow(0 0 7px #fff)"/>
+        <path d="M 80 60 Q 100 44 118 22 T 95 4" fill="none" stroke="#ec4899" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+        <path d="M 80 60 Q 60 76 42 98 T 65 116" fill="none" stroke="#7c3aed" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+        <path d="M 80 60 Q 108 68 148 64" fill="none" stroke="#60a5fa" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+        <path d="M 80 60 Q 52 52 12 56" fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
+        <circle cx="116" cy="25" r="2.5" fill="#fff" opacity="0.9"/>
+        <circle cx="46" cy="95" r="2" fill="#f59e0b" opacity="0.9"/>
+        <circle cx="144" cy="62" r="1.5" fill="#fff" opacity="0.8"/>
+        <circle cx="16" cy="54" r="1.5" fill="#fff" opacity="0.8"/>
+        <circle cx="30" cy="30" r="1" fill="#fff" opacity="0.7"/>
+        <circle cx="130" cy="95" r="1" fill="#f59e0b" opacity="0.7"/>
+        <text x="80" y="116" fill="#a78bfa" font-size="9" text-anchor="middle" font-family="Comfortaa, sans-serif">Somon Yo'li galaktikasi</text>
       </svg>
     `,
     q4: `
-      <svg viewBox="0 0 160 100" class="quiz-illus-svg" style="max-height:100px;">
-        <ellipse cx="80" cy="50" rx="66" ry="16" fill="none" stroke="#fef08a" stroke-width="5" transform="rotate(-12 80 50)" />
-        <circle cx="80" cy="50" r="28" fill="#ffd700" />
-        <path d="M 17 56 A 66 16 0 0 0 143 44" fill="none" stroke="#fef08a" stroke-width="5" transform="rotate(-12 80 50)"/>
-      </svg>
+      <div class="quiz-single-planet-wrap">
+        <img src="images/saturn.png" alt="Saturn" class="quiz-big-planet-img quiz-big-saturn">
+        <div class="quiz-planet-badge">Saturn — eng go'zal halqalar! 💍</div>
+      </div>
     `,
     q5: `
-      <svg viewBox="0 0 240 120" class="quiz-illus-svg" style="max-height:120px;">
-        <circle cx="60" cy="60" r="24" fill="#f59e0b" filter="drop-shadow(0 0 8px #ffd700)" />
-        <ellipse cx="120" cy="60" rx="90" ry="40" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1.5" />
-        <g transform="translate(185, 82)">
-          <circle cx="0" cy="0" r="10" fill="#0ea5e9" />
-          <circle cx="0" cy="0" r="13" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.5" />
-        </g>
-        <path d="M 85 60 L 150 75" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="3,3" />
-        <polygon points="152,78 142,75 148,69" fill="#7c3aed" />
-        <text x="120" y="46" fill="#7c3aed" font-size="11" font-family="Comfortaa" font-weight="bold">3-chi o\'rin</text>
-      </svg>
+      <div class="quiz-orbit-diagram">
+        <div class="quiz-orbit-sun-wrap">☀️</div>
+        <div class="quiz-orbit-planets">
+          <div class="quiz-orbit-dot-planet"><div class="quiz-odot" style="background:#94a3b8"></div><small>1</small></div>
+          <div class="quiz-orbit-dot-planet"><div class="quiz-odot" style="background:#f59e0b"></div><small>2</small></div>
+          <div class="quiz-orbit-dot-planet quiz-earth-highlight"><img src="images/earth.png" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:3px solid #10b981;box-shadow:0 0 12px #10b981"><small style="color:#10b981;font-weight:800">3 ✅</small></div>
+          <div class="quiz-orbit-dot-planet"><div class="quiz-odot" style="background:#ef4444"></div><small>4</small></div>
+          <div class="quiz-orbit-dot-planet"><div class="quiz-odot" style="background:#f59e0b;width:18px;height:18px"></div><small>5</small></div>
+        </div>
+        <div class="quiz-orbit-label">Yer — 3-chi o'rinda!</div>
+      </div>
     `
   };
 
