@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bolalar uchun koinot, quyosh tizimi, sayyoralar va yulduzlar haqida qiziqarli va interaktiv sayohat. Darslarni o'rganing va testdan o'tib yulduzlarni qo'lga kiriting!">
+  <title>Koinot Sarguzashti! 🚀 Sayyoralar va Yulduzlar</title>
+  <!-- Google Fonts: Comfortaa & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Stars Container -->
+  <div id="starfield"></div>
+  <!-- Dynamic Shooting Stars Container -->
+  <div id="shooting-stars-container"></div>
+  <!-- Confetti/Burst Canvas for Quiz/Victory -->
+  <div id="particle-overlay"></div>
+
+  <!-- Header Badge -->
+  <header class="main-header">
+    <div class="brand-badge">
+      <span>NAJOT TA'LIM · AI BILAN TA'LIM MUSOBAQASI</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION 1: KIRISH EKRANI (Welcome Screen) -->
+    <section id="welcome-screen" class="active-section">
+      <div class="welcome-container">
+        
+        <!-- Badge row -->
+        <div class="intro-badges">
+          <div class="info-badge">🪐 8 Sayyora</div>
+          <div class="info-badge">📚 3 Dars</div>
+          <div class="info-badge">🏆 Quiz & Ball</div>
+        </div>
+
+        <!-- Heading Group -->
+        <h1 class="main-title">
+          <span class="line-1">Koinot sarguzashti!</span>
+          <span class="line-2">O'rgan, kashf et, yulduz ol!</span>
+        </h1>
+
+        <p class="welcome-subtitle">
+          Sayyoralar, yulduzlar va koinot sirlari — uchta darsni o'qi, savollarga javob ber va eng ko'p yulduz to'pla!
+        </p>
+
+        <!-- Start Button -->
+        <div class="cta-container">
+          <button id="start-btn" class="glow-button">
+            🚀 Boshlash!
+          </button>
+        </div>
+
+        <!-- Space Scene (Rocket and Orbiting Planets) -->
+        <div class="space-scene">
+          
+          <!-- Central bobbing rocket -->
+          <div class="rocket-wrapper">
+            <svg class="rocket-svg" viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+              <!-- Flame -->
+              <g class="flame-group">
+                <path d="M 60 140 Q 45 165 60 180 Q 75 165 60 140 Z" fill="#ffb703" />
+                <path d="M 60 143 Q 50 160 60 172 Q 70 160 60 143 Z" fill="#ff4d6d" />
+                <path d="M 60 146 Q 55 155 60 165 Q 65 155 60 146 Z" fill="#ffffff" />
+              </g>
+              <!-- Flame Sparks -->
+              <circle class="spark spark-1" cx="55" cy="165" r="3" fill="#ffb703" opacity="0.8" />
+              <circle class="spark spark-2" cx="65" cy="170" r="2.5" fill="#ff4d6d" opacity="0.8" />
+              <circle class="spark spark-3" cx="60" cy="175" r="2" fill="#ffffff" opacity="0.9" />
+              
+              <!-- Rocket Body (Red) -->
+              <path d="M 60 15 C 35 60 35 120 35 140 L 85 140 C 85 120 85 60 60 15 Z" fill="#e63946" />
+              <!-- White nose cone details -->
+              <path d="M 60 15 C 44 43 41 60 41 70 L 79 70 C 79 60 76 43 60 15 Z" fill="#ffffff" opacity="0.2" />
+              <!-- Rocket Base (White trim) -->
+              <path d="M 35 130 L 85 130 L 85 140 L 35 140 Z" fill="#ffffff" />
+              <!-- Stripe details -->
+              <path d="M 45 110 L 75 110 L 75 115 L 45 115 Z" fill="#ffd700" />
+              <path d="M 40 95 L 80 95 L 80 100 L 40 100 Z" fill="#ffffff" />
+              
+              <!-- Left Fin (White) -->
+              <path d="M 35 110 C 20 120 10 145 15 150 C 25 150 35 140 35 130 Z" fill="#ffffff" />
+              <!-- Right Fin (White) -->
+              <path d="M 85 110 C 100 120 110 145 105 150 C 95 150 85 140 85 130 Z" fill="#ffffff" />
+              <!-- Center Fin (Red) -->
+              <path d="M 57 130 L 63 130 L 60 155 Z" fill="#ff4d6d" />
+              
+              <!-- Porthole Window -->
+              <circle cx="60" cy="75" r="16" fill="#ffd700" />
+              <circle cx="60" cy="75" r="13" fill="#1d3557" />
+              <circle cx="60" cy="75" r="10" fill="#00d4ff" />
+              <!-- Window shine -->
+              <path d="M 53 71 A 10 10 0 0 1 67 71 A 10 10 0 0 0 53 71 Z" fill="#ffffff" opacity="0.6" />
+            </svg>
+          </div>
+
+          <!-- SURROUNDING ROTATING PLANETS -->
+          <!-- 1. Saturn -->
+          <div class="hero-planet p-saturn">
+            <svg viewBox="0 0 100 100" class="rotating-svg">
+              <defs>
+                <radialGradient id="saturn-grad" cx="40%" cy="40%" r="50%">
+                  <stop offset="0%" stop-color="#ffd700" />
+                  <stop offset="100%" stop-color="#cc8e00" />
+                </radialGradient>
+              </defs>
+              <ellipse cx="50" cy="50" rx="45" ry="12" fill="none" stroke="#e9d8a6" stroke-width="6" transform="rotate(-15 50 50)" opacity="0.6"/>
+              <circle cx="50" cy="50" r="22" fill="url(#saturn-grad)" />
+              <ellipse cx="50" cy="50" rx="45" ry="12" fill="none" stroke="#ffe5a3" stroke-width="4" transform="rotate(-15 50 50)"/>
+              <!-- Ring front-cut shadow simulation by drawing half ring or clipping -->
+              <path d="M 12 60 A 45 12 0 0 0 88 40" fill="none" stroke="#ffe5a3" stroke-width="4" transform="rotate(-15 50 50)"/>
+            </svg>
+          </div>
+
+          <!-- 2. Earth -->
+          <div class="hero-planet p-earth">
+            <svg viewBox="0 0 100 100" class="rotating-svg">
+              <circle cx="50" cy="50" r="25" fill="#0077b6" />
+              <!-- Continents (swirling green) -->
+              <path d="M 35 38 Q 40 30 48 35 T 62 42 T 50 65 T 32 55 Z" fill="#2a9d8f" />
+              <path d="M 55 58 Q 65 60 70 70 T 60 75 Z" fill="#2a9d8f" />
+              <path d="M 62 30 Q 70 25 72 35 Z" fill="#2a9d8f" />
+              <!-- Cloud patches -->
+              <path d="M 33 42 Q 40 45 42 40 T 52 42" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+              <path d="M 45 60 Q 52 58 55 64" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.6" />
+            </svg>
+          </div>
+
+          <!-- 3. Mars -->
+          <div class="hero-planet p-mars">
+            <svg viewBox="0 0 100 100" class="rotating-svg">
+              <circle cx="50" cy="50" r="20" fill="#e63946" />
+              <!-- Dark patches -->
+              <circle cx="43" cy="45" r="4" fill="#a8202a" />
+              <circle cx="55" cy="58" r="5" fill="#a8202a" />
+              <path d="M 36 52 Q 40 60 48 54" fill="none" stroke="#a8202a" stroke-width="3" stroke-linecap="round" />
+              <!-- Polar ice cap -->
+              <path d="M 45 31 A 20 20 0 0 1 55 31 Z" fill="#ffffff" />
+            </svg>
+          </div>
+
+          <!-- 4. Jupiter -->
+          <div class="hero-planet p-jupiter">
+            <svg viewBox="0 0 120 120" class="rotating-svg">
+              <defs>
+                <linearGradient id="jup-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#b07d62" />
+                  <stop offset="20%" stop-color="#ffd8be" />
+                  <stop offset="40%" stop-color="#9c6644" />
+                  <stop offset="65%" stop-color="#ffd8be" />
+                  <stop offset="85%" stop-color="#7f5539" />
+                  <stop offset="100%" stop-color="#b07d62" />
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="60" r="30" fill="url(#jup-grad)" />
+              <!-- Red storm spot -->
+              <ellipse cx="78" cy="72" rx="6" ry="4" fill="#d90429" />
+              <!-- Stripe swirls -->
+              <path d="M 34 50 Q 60 45 86 52" fill="none" stroke="#7f5539" stroke-width="2" opacity="0.8"/>
+              <path d="M 32 70 Q 60 75 88 68" fill="none" stroke="#ffd8be" stroke-width="1.5" opacity="0.8"/>
+            </svg>
+          </div>
+
+          <!-- 5. Uranus -->
+          <div class="hero-planet p-uranus">
+            <svg viewBox="0 0 100 100" class="rotating-svg">
+              <!-- Tilted rings -->
+              <ellipse cx="50" cy="50" rx="30" ry="6" fill="none" stroke="#a8dadc" stroke-width="1.5" transform="rotate(65 50 50)" opacity="0.6"/>
+              <circle cx="50" cy="50" r="18" fill="#90e0ef" />
+              <ellipse cx="50" cy="50" rx="30" ry="6" fill="none" stroke="#a8dadc" stroke-width="1.5" transform="rotate(65 50 50)"/>
+            </svg>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: O'RGATUVCHI QISM (Three Teaching Lessons) -->
+    <section id="lessons-section">
+      <div class="section-container">
+        
+        <!-- Header -->
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 class="section-title">Koinot darslarini boshlaylik</h2>
+          <p class="section-subtitle">
+            Uchta darsni o'qi, rasm va faktlarni ko'r. Har bir darsdan keyin quyiga o'tishni unutmang!
+          </p>
+        </div>
+
+        <!-- Horizontal Lesson Tabs -->
+        <div class="lesson-tabs">
+          <button class="tab-button active" data-tab="tab-1">
+            <span class="tab-icon">☀️</span>
+            <span class="tab-text">Dars 1<br><small>Quyosh tizimi</small></span>
+          </button>
+          <button class="tab-button" data-tab="tab-2">
+            <span class="tab-icon">🪐</span>
+            <span class="tab-text">Dars 2<br><small>Sayyoralar</small></span>
+          </button>
+          <button class="tab-button" data-tab="tab-3">
+            <span class="tab-icon">⭐</span>
+            <span class="tab-text">Dars 3<br><small>Yulduzlar</small></span>
+          </button>
+        </div>
+
+        <!-- Tabs Content Container -->
+        <div class="tabs-content">
+
+          <!-- LESSON 1: Quyosh tizimi -->
+          <div id="tab-1" class="tab-pane active">
+            <div class="lesson-grid">
+              
+              <!-- Left side: Illustration -->
+              <div class="lesson-illustration">
+                <div class="solarsystem-lineup">
+                  <svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                    <!-- Stars context -->
+                    <circle cx="100" cy="80" r="1.5" fill="#fff" opacity="0.7"/>
+                    <circle cx="250" cy="50" r="1" fill="#fff" opacity="0.6"/>
+                    <circle cx="480" cy="90" r="2" fill="#fff" opacity="0.8"/>
+                    <circle cx="380" cy="300" r="1" fill="#fff" opacity="0.5"/>
+                    <circle cx="550" cy="270" r="1.5" fill="#fff" opacity="0.7"/>
+                    
+                    <!-- Orbit Arcs -->
+                    <path d="M 0 350 A 600 350 0 0 1 140 350" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+                    <path d="M 0 350 A 600 350 0 0 1 180 350" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+                    <path d="M 0 350 A 600 350 0 0 1 230 350" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+                    <path d="M 0 350 A 600 350 0 0 1 280 350" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+                    <path d="M 0 350 A 600 350 0 0 1 340 350" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+                    <path d="M 0 350 A 600 350 0 0 1 420 350" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+                    <path d="M 0 350 A 600 350 0 0 1 500 350" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+                    <path d="M 0 350 A 600 350 0 0 1 570 350" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+
+                    <!-- SUN (Huge glowing yellow on the left) -->
+                    <g transform="translate(0, 350)">
+                      <!-- Outer glows -->
+                      <circle cx="0" cy="0" r="100" fill="rgba(255, 183, 3, 0.15)" />
+                      <circle cx="0" cy="0" r="85" fill="rgba(255, 183, 3, 0.3)" />
+                      <circle cx="0" cy="0" r="70" fill="#ffb703" />
+                      <circle cx="0" cy="0" r="62" fill="#ffd700" />
+                      <circle cx="0" cy="0" r="55" fill="#ffffff" />
+                      
+                      <!-- Rays -->
+                      <line x1="0" y1="-78" x2="0" y2="-98" stroke="#ffd700" stroke-width="3" stroke-linecap="round" />
+                      <line x1="55" y1="-55" x2="70" y2="-70" stroke="#ffd700" stroke-width="3" stroke-linecap="round" />
+                      <line x1="78" y1="0" x2="98" y2="0" stroke="#ffd700" stroke-width="3" stroke-linecap="round" />
+                    </g>
+                    
+                    <!-- PLANETS IN LINE FROM SUN -->
+                    <!-- 1. Merkuriy -->
+                    <g transform="translate(100, 305)">
+                      <circle cx="0" cy="0" r="6" fill="#8d99ae" />
+                      <circle cx="-1.5" cy="-1.5" r="1" fill="#5c677d" />
+                      <circle cx="2" cy="2" r="0.8" fill="#5c677d" />
+                      <text x="0" y="15" fill="#a9b6e2" font-size="8" text-anchor="middle" font-family="'Comfortaa', sans-serif">Merkuriy</text>
+                    </g>
+                    
+                    <!-- 2. Venera -->
+                    <g transform="translate(142, 280)">
+                      <circle cx="0" cy="0" r="10" fill="#e9d8a6" />
+                      <!-- Swirling cloud stripes -->
+                      <path d="M -8 -4 Q 0 -6 8 -2" fill="none" stroke="#d4a373" stroke-width="1.5" opacity="0.6"/>
+                      <path d="M -9 2 Q 0 4 9 0" fill="none" stroke="#d4a373" stroke-width="1.5" opacity="0.6"/>
+                      <text x="0" y="20" fill="#a9b6e2" font-size="8" text-anchor="middle" font-family="'Comfortaa', sans-serif">Venera</text>
+                    </g>
+                    
+                    <!-- 3. Yer -->
+                    <g transform="translate(195, 250)">
+                      <circle cx="0" cy="0" r="12" fill="#0077b6" />
+                      <path d="M -8 -6 C -3 -5 -4 0 -2 -1 C 2 -2 6 -8 8 -2 C 9 4 4 9 -3 7 C -8 5 -10 0 -8 -6 Z" fill="#2a9d8f" />
+                      <path d="M -4 -8 Q 0 -5 4 -9" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5" />
+                      <text x="0" y="22" fill="#a9b6e2" font-size="8" text-anchor="middle" font-family="'Comfortaa', sans-serif">Yer</text>
+                    </g>
+
+                    <!-- 4. Mars -->
+                    <g transform="translate(248, 222)">
+                      <circle cx="0" cy="0" r="9" fill="#e63946" />
+                      <circle cx="2" cy="-2" r="2.5" fill="#a8202a" />
+                      <path d="M -4 4 Q 0 1 4 5" fill="none" stroke="#a8202a" stroke-width="1.5" />
+                      <text x="0" y="18" fill="#a9b6e2" font-size="8" text-anchor="middle" font-family="'Comfortaa', sans-serif">Mars</text>
+                    </g>
+
+                    <!-- 5. Yupiter -->
+                    <g transform="translate(315, 182)">
+                      <circle cx="0" cy="0" r="24" fill="#b07d62" />
+                      <path d="M -23 -10 Q 0 -14 23 -10" fill="none" stroke="#7f5539" stroke-width="3" opacity="0.7"/>
+                      <path d="M -24 -2 Q 0 2 24 -2" fill="none" stroke="#ffd8be" stroke-width="2.5" opacity="0.8"/>
+                      <path d="M -23 8 Q 0 4 23 8" fill="none" stroke="#7f5539" stroke-width="3" opacity="0.7"/>
+                      <ellipse cx="12" cy="3" rx="4" ry="2.5" fill="#d90429" />
+                      <text x="0" y="36" fill="#a9b6e2" font-size="9" text-anchor="middle" font-family="'Comfortaa', sans-serif" font-weight="bold">Yupiter</text>
+                    </g>
+
+                    <!-- 6. Saturn -->
+                    <g transform="translate(405, 138)">
+                      <!-- Rings back -->
+                      <ellipse cx="0" cy="0" rx="35" ry="8" fill="none" stroke="#ffe5a3" stroke-width="4.5" transform="rotate(-12)" opacity="0.7"/>
+                      <!-- Planet body -->
+                      <circle cx="0" cy="0" r="20" fill="#ffd700" />
+                      <!-- Rings front -->
+                      <path d="M -34 7 A 35 8 0 0 0 34 -7" fill="none" stroke="#ffe5a3" stroke-width="4.5" transform="rotate(-12)"/>
+                      <text x="0" y="32" fill="#a9b6e2" font-size="9" text-anchor="middle" font-family="'Comfortaa', sans-serif" font-weight="bold">Saturn</text>
+                    </g>
+
+                    <!-- 7. Uran -->
+                    <g transform="translate(485, 95)">
+                      <ellipse cx="0" cy="0" rx="20" ry="4" fill="none" stroke="#a8dadc" stroke-width="1.5" transform="rotate(70)" opacity="0.5"/>
+                      <circle cx="0" cy="0" r="14" fill="#90e0ef" />
+                      <ellipse cx="0" cy="0" rx="20" ry="4" fill="none" stroke="#a8dadc" stroke-width="1.5" transform="rotate(70)"/>
+                      <text x="0" y="24" fill="#a9b6e2" font-size="8" text-anchor="middle" font-family="'Comfortaa', sans-serif">Uran</text>
+                    </g>
+
+                    <!-- 8. Neptun -->
+                    <g transform="translate(555, 60)">
+                      <circle cx="0" cy="0" r="13" fill="#0077b6" />
+                      <path d="M -11 -3 Q 0 -5 11 -2" fill="none" stroke="#0096c7" stroke-width="2" />
+                      <path d="M -10 4 Q 0 1 10 5" fill="none" stroke="#03045e" stroke-width="2" opacity="0.6"/>
+                      <text x="0" y="22" fill="#a9b6e2" font-size="8" text-anchor="middle" font-family="'Comfortaa', sans-serif">Neptun</text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Right side: Text details -->
+              <div class="lesson-text-panel">
+                <h3 class="lesson-inner-title">Quyosh tizimi nima?</h3>
+                <p class="lesson-paragraph">
+                  Quyosh tizimi — bu Quyosh va uning tortish kuchi tufayli uning atrofida aylanadigan barcha jismlarning majmui. Unda 8 ta sayyora, yuzlab oy, asteroidlar va kometalar bor. Quyosh tizimining markazida Quyosh joylashgan.
+                </p>
+
+                <!-- 3 Fact Cards -->
+                <div class="fact-cards-stack">
+                  <div class="fact-card border-yellow">
+                    <span class="fact-icon">☀️</span>
+                    <div class="fact-content">
+                      Quyosh — bu yulduz! U shunchalik kattaki, ichiga 1 million 300 ming ta Yer sig'adi.
+                    </div>
+                  </div>
+                  <div class="fact-card border-blue">
+                    <span class="fact-icon">🌍</span>
+                    <div class="fact-content">
+                      Yer — Quyoshdan uchinchi sayyora va hozirgacha hayot topilgan yagona joy.
+                    </div>
+                  </div>
+                  <div class="fact-card border-orange">
+                    <span class="fact-icon">🔭</span>
+                    <div class="fact-content">
+                      Eng katta sayyora — Yupiter. Uning ichiga 1300 ta Yer sig'ishi mumkin!
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- LESSON 2: Sayyoralar -->
+          <div id="tab-2" class="tab-pane">
+            <h3 class="lesson-inner-title text-center">8 Sayyora — bittasini bosib, sir bil!</h3>
+            <p class="lesson-paragraph text-center">
+              Har bir sayyoraga bosing yoki teging va u haqida qiziqarli faktlarni o'qing!
+            </p>
+
+            <!-- Grid of 8 Planet Circles -->
+            <div class="planets-grid">
+              
+              <!-- 1. Merkuriy -->
+              <button class="planet-grid-item" data-planet="merkuriy" style="--planet-color: #8d99ae;">
+                <div class="planet-circle-wrapper">
+                  <svg viewBox="0 0 100 100" class="planet-circle-svg">
+                    <circle cx="50" cy="50" r="38" fill="#8d99ae" />
+                    <!-- craters -->
+                    <circle cx="36" cy="36" r="6" fill="#717a8a" opacity="0.8" />
+                    <circle cx="58" cy="62" r="8" fill="#717a8a" opacity="0.8" />
+                    <circle cx="68" cy="38" r="4" fill="#717a8a" opacity="0.8" />
+                    <circle cx="32" cy="64" r="5" fill="#717a8a" opacity="0.8" />
+                  </svg>
+                </div>
+                <span class="planet-grid-name">Merkuriy</span>
+              </button>
+
+              <!-- 2. Venera -->
+              <button class="planet-grid-item" data-planet="venera" style="--planet-color: #ffd700;">
+                <div class="planet-circle-wrapper">
+                  <svg viewBox="0 0 100 100" class="planet-circle-svg">
+                    <circle cx="50" cy="50" r="38" fill="#e9d8a6" />
+                    <path d="M 20 40 Q 50 30 80 40" fill="none" stroke="#d4a373" stroke-width="4" stroke-linecap="round" opacity="0.7" />
+                    <path d="M 15 60 Q 50 70 85 60" fill="none" stroke="#d4a373" stroke-width="5" stroke-linecap="round" opacity="0.7" />
+                    <path d="M 25 22 Q 50 18 75 25" fill="none" stroke="#d4a373" stroke-width="3" opacity="0.5" />
+                  </svg>
+                </div>
+                <span class="planet-grid-name">Venera</span>
+              </button>
+
+              <!-- 3. Yer -->
+              <button class="planet-grid-item" data-planet="yer" style="--planet-color: #00d4ff;">
+                <div class="planet-circle-wrapper">
+                  <svg viewBox="0 0 100 100" class="planet-circle-svg">
+                    <circle cx="50" cy="50" r="38" fill="#0077b6" />
+                    <path d="M 25 35 Q 35 20 50 25 T 70 35 T 55 75 T 25 55 Z" fill="#2a9d8f" />
+                    <path d="M 55 60 Q 70 65 80 80 T 60 85 Z" fill="#2a9d8f" />
+                    <!-- clouds -->
+                    <path d="M 20 45 Q 40 50 50 42 T 80 45" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.6" />
+                    <path d="M 30 65 Q 50 60 70 70" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.6" />
+                  </svg>
+                </div>
+                <span class="planet-grid-name">Yer</span>
+              </button>
+
+              <!-- 4. Mars -->
+              <button class="planet-grid-item" data-planet="mars" style="--planet-color: #ff4d6d;">
+                <div class="planet-circle-wrapper">
+                  <svg viewBox="0 0 100 100" class="planet-circle-svg">
+                    <circle cx="50" cy="50" r="38" fill="#e63946" />
+                    <circle cx="35" cy="40" r="7" fill="#a8202a" />
+                    <circle cx="65" cy="58" r="9" fill="#a8202a" />
+                    <path d="M 22 55 Q 45 42 72 58" fill="none" stroke="#a8202a" stroke-width="4" stroke-linecap="round" />
+                    <!-- Polar ice caps -->
+                    <path d="M 40 13 A 38 38 0 0 1 60 13 Z" fill="#ffffff" />
+                  </svg>
+                </div>
+                <span class="planet-grid-name">Mars</span>
+              </button>
+
+              <!-- 5. Yupiter -->
+              <button class="planet-grid-item" data-planet="yupiter" style="--planet-color: #ffb703;">
+                <div class="planet-circle-wrapper">
+                  <svg viewBox="0 0 100 100" class="planet-circle-svg">
+                    <circle cx="50" cy="50" r="38" fill="#b07d62" />
+                    <path d="M 13 32 Q 50 25 87 32" fill="none" stroke="#7f5539" stroke-width="4" opacity="0.7"/>
+                    <path d="M 12 48 Q 50 54 88 48" fill="none" stroke="#ffd8be" stroke-width="3.5" opacity="0.8"/>
+                    <path d="M 13 65 Q 50 58 87 65" fill="none" stroke="#7f5539" stroke-width="4.5" opacity="0.7"/>
+                    <ellipse cx="68" cy="55" rx="8" ry="5.5" fill="#d90429" />
+                  </svg>
+                </div>
+                <span class="planet-grid-name">Yupiter</span>
+              </button>
+
+              <!-- 6. Saturn -->
+              <button class="planet-grid-item" data-planet="saturn" style="--planet-color: #ffd700;">
+                <div class="planet-circle-wrapper">
+                  <svg viewBox="0 0 100 100" class="planet-circle-svg">
+                    <ellipse cx="50" cy="50" rx="48" ry="12" fill="none" stroke="#ffe5a3" stroke-width="5" transform="rotate(-15 50 50)" opacity="0.7" />
+                    <circle cx="50" cy="50" r="26" fill="#ffd700" />
+                    <path d="M 10 58 A 48 12 0 0 0 90 42" fill="none" stroke="#ffe5a3" stroke-width="5" transform="rotate(-15 50 50)"/>
+                  </svg>
+                </div>
+                <span class="planet-grid-name">Saturn</span>
+              </button>
+
+              <!-- 7. Uran -->
+              <button class="planet-grid-item" data-planet="uran" style="--planet-color: #00d4ff;">
+                <div class="planet-circle-wrapper">
+                  <svg viewBox="0 0 100 100" class="planet-circle-svg">
+                    <ellipse cx="50" cy="50" rx="44" ry="8" fill="none" stroke="#a8dadc" stroke-width="2" transform="rotate(70 50 50)" opacity="0.5" />
+                    <circle cx="50" cy="50" r="26" fill="#90e0ef" />
+                    <ellipse cx="50" cy="50" rx="44" ry="8" fill="none" stroke="#a8dadc" stroke-width="2" transform="rotate(70 50 50)"/>
+                  </svg>
+                </div>
+                <span class="planet-grid-name">Uran</span>
+              </button>
+
+              <!-- 8. Neptun -->
+              <button class="planet-grid-item" data-planet="neptun" style="--planet-color: #0077b6;">
+                <div class="planet-circle-wrapper">
+                  <svg viewBox="0 0 100 100" class="planet-circle-svg">
+                    <circle cx="50" cy="50" r="38" fill="#0077b6" />
+                    <path d="M 15 42 Q 50 35 85 45" fill="none" stroke="#0096c7" stroke-width="4.5" />
+                    <path d="M 13 62 Q 50 55 87 60" fill="none" stroke="#03045e" stroke-width="4" opacity="0.6"/>
+                    <circle cx="68" cy="38" r="5" fill="#005f73" opacity="0.6"/>
+                  </svg>
+                </div>
+                <span class="planet-grid-name">Neptun</span>
+              </button>
+
+            </div>
+
+            <!-- Horizontal Scrollable Surprise Facts -->
+            <div class="surprise-facts-row">
+              <div class="surprise-fact-bubble">
+                <span class="bubble-icon">🌡️</span>
+                <span class="bubble-text">Eng issiq sayyora — Venera (465°C!)</span>
+              </div>
+              <div class="surprise-fact-bubble">
+                <span class="bubble-icon">⏱️</span>
+                <span class="bubble-text">Yupiterdagi 1 kun — atigi 10 soat</span>
+              </div>
+              <div class="surprise-fact-bubble">
+                <span class="bubble-icon">💨</span>
+                <span class="bubble-text">Neptunda shamol sayyoramizdan 4 marta tez!</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- LESSON 3: Yulduzlar -->
+          <div id="tab-3" class="tab-pane">
+            <div class="lesson-grid">
+              
+              <!-- Left side: Galaxy SVG -->
+              <div class="lesson-illustration">
+                <div class="galaxy-container">
+                  <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                    <defs>
+                      <radialGradient id="galaxy-glow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffd700" stop-opacity="1" />
+                        <stop offset="20%" stop-color="#9d4edd" stop-opacity="0.8" />
+                        <stop offset="60%" stop-color="#00d4ff" stop-opacity="0.4" />
+                        <stop offset="100%" stop-color="#060411" stop-opacity="0" />
+                      </radialGradient>
+                    </defs>
+                    
+                    <!-- Core Glow -->
+                    <circle cx="200" cy="200" r="120" fill="url(#galaxy-glow)" />
+                    <circle cx="200" cy="200" r="10" fill="#ffffff" filter="drop-shadow(0 0 8px #ffb703)" />
+                    
+                    <!-- Swirling Galaxy Arms (Curves with points along them) -->
+                    <g transform="rotate(0 200 200)">
+                      <!-- Arm 1 -->
+                      <path d="M 200 200 Q 230 180 250 140 T 220 80 T 130 90 T 110 180" fill="none" stroke="#9d4edd" stroke-width="12" stroke-linecap="round" opacity="0.35" />
+                      <path d="M 200 200 Q 230 180 250 140 T 220 80 T 130 90 T 110 180" fill="none" stroke="#00d4ff" stroke-width="5" stroke-linecap="round" opacity="0.5" />
+                      <circle cx="240" cy="160" r="3" fill="#fff" />
+                      <circle cx="238" cy="110" r="2" fill="#ffb703" />
+                      <circle cx="170" cy="82" r="2.5" fill="#fff" />
+                      <circle cx="125" cy="120" r="1.5" fill="#00d4ff" />
+                    </g>
+                    
+                    <g transform="rotate(120 200 200)">
+                      <!-- Arm 2 -->
+                      <path d="M 200 200 Q 230 180 250 140 T 220 80 T 130 90 T 110 180" fill="none" stroke="#9d4edd" stroke-width="12" stroke-linecap="round" opacity="0.35" />
+                      <path d="M 200 200 Q 230 180 250 140 T 220 80 T 130 90 T 110 180" fill="none" stroke="#00d4ff" stroke-width="5" stroke-linecap="round" opacity="0.5" />
+                      <circle cx="240" cy="160" r="2.5" fill="#fff" />
+                      <circle cx="238" cy="110" r="1.5" fill="#ffb703" />
+                      <circle cx="170" cy="82" r="3" fill="#fff" />
+                    </g>
+                    
+                    <g transform="rotate(240 200 200)">
+                      <!-- Arm 3 -->
+                      <path d="M 200 200 Q 230 180 250 140 T 220 80 T 130 90 T 110 180" fill="none" stroke="#9d4edd" stroke-width="12" stroke-linecap="round" opacity="0.35" />
+                      <path d="M 200 200 Q 230 180 250 140 T 220 80 T 130 90 T 110 180" fill="none" stroke="#00d4ff" stroke-width="5" stroke-linecap="round" opacity="0.5" />
+                      <circle cx="240" cy="160" r="2" fill="#fff" />
+                      <circle cx="238" cy="110" r="3" fill="#fff" />
+                      <circle cx="170" cy="82" r="1.5" fill="#00d4ff" />
+                    </g>
+                    
+                    <!-- Random bright stars in the cluster -->
+                    <circle cx="140" cy="150" r="3.5" fill="#fff" opacity="0.9" />
+                    <circle cx="270" cy="240" r="4" fill="#ffb703" opacity="0.8" />
+                    <circle cx="210" cy="300" r="3" fill="#00d4ff" opacity="0.8" />
+                    <circle cx="110" cy="225" r="2" fill="#fff" opacity="0.9" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Right side: Text details -->
+              <div class="lesson-text-panel">
+                <h3 class="lesson-inner-title">Yulduzlar va Galaktikalar</h3>
+                <p class="lesson-paragraph">
+                  Koinotdagi yulduzlar soni Yerdagi barcha qum donachalaridan ham ko'p! Bizning Quyosh ham yulduz — lekin juda o'rtacha kattalikda. Galaktikalar — milliardlab yulduzlardan iborat ulkan kosmik oilalar.
+                </p>
+
+                <!-- 3 Fact Cards -->
+                <div class="fact-cards-stack">
+                  <div class="fact-card border-purple">
+                    <span class="fact-icon">✨</span>
+                    <div class="fact-content">
+                      Bizning galaktika "Somon Yo'li" (Milky Way) deb ataladi — unda 200 milliard yulduz bor!
+                    </div>
+                  </div>
+                  <div class="fact-card border-coral">
+                    <span class="fact-icon">💥</span>
+                    <div class="fact-content">
+                      Yulduzlar portlab o'lib "supernova" hosil qiladi — koinotdagi eng kuchli portlash!
+                    </div>
+                  </div>
+                  <div class="fact-card border-darkblue">
+                    <span class="fact-icon">🌑</span>
+                    <div class="fact-content">
+                      Qora tuynuklar — hatto yorug'lik ham chiqib keta olmaydigan sirli joy.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Floating Astronaut Mascot at bottom of Lesson 3 -->
+            <div class="astronaut-banner">
+              <div class="astronaut-svg-wrapper">
+                <svg viewBox="0 0 150 180" xmlns="http://www.w3.org/2000/svg" class="astronaut-svg">
+                  <!-- Suit Shadow -->
+                  <ellipse cx="75" cy="170" rx="30" ry="8" fill="rgba(0,0,0,0.3)" />
+
+                  <!-- Waving Arm (Left) -->
+                  <g class="astronaut-left-arm">
+                    <!-- Arm sleeve -->
+                    <path d="M 45 80 Q 25 70 20 50 C 18 45 28 40 32 46 Q 38 62 48 72 Z" fill="#ffffff" stroke="#ced4da" stroke-width="1"/>
+                    <!-- glove (pointing up/waving) -->
+                    <circle cx="18" cy="46" r="6" fill="#adb5bd"/>
+                    <path d="M 16 43 Q 12 36 15 32 Q 18 32 18 40" stroke="#adb5bd" stroke-width="2" stroke-linecap="round" fill="none"/>
+                  </g>
+
+                  <!-- Left Leg -->
+                  <path d="M 55 125 Q 50 145 42 160 C 38 165 48 170 52 165 Q 60 148 65 128 Z" fill="#ffffff" stroke="#ced4da" stroke-width="1"/>
+                  <path d="M 42 160 L 52 165 L 48 172 L 35 168 Z" fill="#adb5bd" /> <!-- boot -->
+
+                  <!-- Right Leg -->
+                  <path d="M 95 125 Q 100 145 108 160 C 112 165 102 170 98 165 Q 90 148 85 128 Z" fill="#ffffff" stroke="#ced4da" stroke-width="1"/>
+                  <path d="M 108 160 L 98 165 L 102 172 L 115 168 Z" fill="#adb5bd" /> <!-- boot -->
+
+                  <!-- Right Arm (Downwards) -->
+                  <path d="M 105 80 Q 120 90 128 110 C 130 115 120 120 116 114 Q 110 98 102 85 Z" fill="#ffffff" stroke="#ced4da" stroke-width="1"/>
+                  <circle cx="128" cy="112" r="6" fill="#adb5bd"/>
+
+                  <!-- Suit Torso -->
+                  <path d="M 45 80 C 45 65 105 65 105 80 L 95 130 C 95 130 75 135 55 130 Z" fill="#ffffff" stroke="#ced4da" stroke-width="1" />
+                  
+                  <!-- Chest Panel details -->
+                  <rect x="62" y="85" width="26" height="20" rx="3" fill="#495057" />
+                  <circle cx="68" cy="95" r="2.5" fill="#e63946" />
+                  <circle cx="75" cy="95" r="2.5" fill="#00d4ff" />
+                  <rect x="80" y="93" width="5" height="4" fill="#ffd700" />
+                  
+                  <!-- Uzbek Flag Badge on Shoulder (Right Arm) -->
+                  <g transform="translate(100, 83) rotate(15)">
+                    <rect x="0" y="0" width="12" height="8" fill="#ffffff" rx="1"/>
+                    <rect x="0" y="0" width="12" height="2.5" fill="#0096c7" />
+                    <rect x="0" y="5.5" width="12" height="2.5" fill="#2a9d8f" />
+                    <line x1="0" y1="2.5" x2="12" y2="2.5" stroke="#e63946" stroke-width="0.5" />
+                    <line x1="0" y1="5.5" x2="12" y2="5.5" stroke="#e63946" stroke-width="0.5" />
+                    <circle cx="2.5" cy="1.2" r="0.6" fill="#fff" />
+                  </g>
+
+                  <!-- Helmet -->
+                  <circle cx="75" cy="52" r="28" fill="#ffffff" stroke="#ced4da" stroke-width="1"/>
+                  <circle cx="75" cy="52" r="22" fill="#1d3557" />
+                  <circle cx="75" cy="52" r="19" fill="#00b4d8" />
+                  
+                  <!-- Smiling Happy Face -->
+                  <g class="astronaut-face">
+                    <circle cx="67" cy="48" r="2.5" fill="#03045e" />
+                    <circle cx="83" cy="48" r="2.5" fill="#03045e" />
+                    <path d="M 68 56 Q 75 64 82 56" fill="none" stroke="#03045e" stroke-width="2.5" stroke-linecap="round" />
+                    <circle cx="63" cy="54" r="2" fill="#ff85a1" opacity="0.6" />
+                    <circle cx="87" cy="54" r="2" fill="#ff85a1" opacity="0.6" />
+                  </g>
+                  
+                  <!-- Visor Glass Shine -->
+                  <path d="M 59 40 A 19 19 0 0 1 91 40 A 19 19 0 0 0 59 40 Z" fill="#ffffff" opacity="0.4" />
+                </svg>
+              </div>
+              <div class="astronaut-bubble">
+                "Koinot sirlarini o'rganish juda qiziqarli, shunday emasmi? Quyida joylashgan 'Keyingi dars' yoki 'Boshlash' tugmasi yordamida o'tishni davom eting!"
+              </div>
+            </div>
+
+          </div>
+
+        </div> <!-- End of tabs content -->
+
+        <!-- Bottom Lesson Navigation & Progress Indicator -->
+        <div class="lesson-navigation">
+          <div class="progress-indicator">
+            <div class="progress-step active" data-step="tab-1">
+              <span class="step-dot"></span>
+              <span class="step-label">Dars 1</span>
+            </div>
+            <div class="progress-step" data-step="tab-2">
+              <span class="step-dot"></span>
+              <span class="step-label">Dars 2</span>
+            </div>
+            <div class="progress-step" data-step="tab-3">
+              <span class="step-dot"></span>
+              <span class="step-label">Dars 3</span>
+            </div>
+          </div>
+
+          <button id="next-lesson-btn" class="nav-button">
+            Keyingi dars →
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: INTERAKTIV QISM (Quiz Game) -->
+    <section id="quiz-section">
+      <div class="section-container">
+        
+        <!-- Header -->
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2 class="section-title">Bilimingni sinab ko'r! 🌟</h2>
+          <p class="section-subtitle">
+            Har bir to'g'ri javob uchun yulduz olasan. Nechta to'playsan?
+          </p>
+        </div>
+
+        <!-- Sticky Score Tracker -->
+        <div class="sticky-score-container">
+          <div class="score-badge">
+            <span class="score-star-icon">⭐</span>
+            <span class="score-text">Yulduzlar: <strong id="score-counter">0</strong> / 5</span>
+          </div>
+        </div>
+
+        <!-- Quiz Panel Card -->
+        <div class="quiz-card-wrapper">
+          <div class="quiz-card" id="quiz-card-content">
+            <!-- Header (Question tracker) -->
+            <div class="quiz-card-header">
+              <span class="question-badge" id="question-badge-el">Savol 1 / 5</span>
+            </div>
+
+            <!-- Question Illustration Space (Dynamic based on question) -->
+            <div class="quiz-illustration" id="quiz-illus-container">
+              <!-- Placeholder for SVGs. Inserted dynamically by JS -->
+            </div>
+
+            <!-- Question Text -->
+            <h3 class="question-text" id="question-text-el">Savol yuklanmoqda...</h3>
+
+            <!-- Options Grid -->
+            <div class="options-grid" id="options-grid-el">
+              <!-- Dynamically populated by JS -->
+            </div>
+
+            <!-- Result Feedback Text -->
+            <div class="feedback-message" id="feedback-message-el"></div>
+
+            <!-- Next Question Footer Button -->
+            <div class="quiz-footer">
+              <button id="next-question-btn" class="nav-button hide">
+                Keyingi savol →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: YAKUNIY EKRAN (Final Results Screen) -->
+    <section id="results-section">
+      <div class="section-container">
+        <div class="result-card">
+          
+          <!-- Astronaut Mascot (changes based on score) -->
+          <div class="result-mascot-container">
+            <div id="result-astronaut-svg"></div>
+          </div>
+
+          <!-- Star Rating Row -->
+          <div class="star-rating-row" id="star-rating-row-el">
+            <span class="rating-star" data-index="1">★</span>
+            <span class="rating-star" data-index="2">★</span>
+            <span class="rating-star" data-index="3">★</span>
+            <span class="rating-star" data-index="4">★</span>
+            <span class="rating-star" data-index="5">★</span>
+          </div>
+
+          <!-- Score Display -->
+          <div class="final-score-display">
+            <span id="final-score-num">0</span> / 5
+          </div>
+
+          <!-- Result Titles -->
+          <h2 class="result-title" id="result-title-el">Koinot Qahramoni!</h2>
+          <p class="result-msg" id="result-msg-el">
+            Yuklanmoqda...
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="result-buttons">
+            <button id="retry-btn" class="action-btn-secondary">
+              🔄 Qaytadan urinib ko'r
+            </button>
+            <button id="relearn-btn" class="action-btn-primary">
+              📚 Darslarni qayta o'qi
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- POPUP MODAL FOR PLANET DETAILS -->
+  <div class="modal-overlay" id="planet-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <div class="modal-body">
+        <div class="modal-header-info">
+          <span class="modal-planet-emoji" id="modal-emoji-el">🪐</span>
+          <h3 class="modal-planet-title" id="modal-title-el">Planet Nomi</h3>
+          <span class="modal-planet-order" id="modal-order-el">Quyoshdan 1-chi sayyora</span>
+        </div>
+        <div class="modal-divider"></div>
+        <ul class="modal-facts-list" id="modal-facts-el">
+          <!-- Bullet points -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <p>Najot Ta'lim · AI bilan ta'lim musobaqasi · 2025</p>
+    <div class="color-dashes">
+      <span class="dash red"></span>
+      <span class="dash orange"></span>
+      <span class="dash teal"></span>
+      <span class="dash purple"></span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
