@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
       color: '#f59e0b',
       facts: [
         'Koinotdagi eng issiq sayyora! Harorat doimo 465°C darajani tashkil etadi.',
-        'O\'z o\'qi atrofida boshqa barcha sayyoralarga teskari tomonga aylanadi.',
+        'O\'z o\'qi atrofida boshqa bacha sayyoralarga teskari tomonga aylanadi.',
         'Osmonda juda yorqin porlaydi, shuning uchun uni ba\'zan "Tong yulduzi" deyishadi.'
       ]
     },
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
       order: 'Quyoshdan 6-chi sayyora',
       color: '#ffd700',
       facts: [
-        'O\'zining ajoyib keng va yorqin halqalari bilan koinotning eng go\'zal sayyorasidir.',
+        'O\'zining ajoyib keng va yorqin halqalari bilan koinotnng eng go\'zal sayyorasidir.',
         'Halqalar asosan muz bo\'laklari, changlar va toshlardan tashkil topgan.',
         'Hozirgi kunda Saturn atrofida aylanuvchi 82 ta oy aniqlangan.'
       ]
@@ -274,16 +274,64 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. THE DRAG AND DROP PLANETS GAME
   // ==========================================================================
   
-  // Compact SVGs of planets for drag game circles
+  // CRITICAL FIX: Mini SVGs of actual detailed cartoon planets for drag game pills
   const planetGameIcons = {
-    merkuriy: `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#94a3b8"/><circle cx="15" cy="15" r="3" fill="#64748b" opacity="0.6"/></svg>`,
-    venera: `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#fef08a"/><path d="M 8 18 Q 20 12 32 18" fill="none" stroke="#eab308" stroke-width="2.5"/></svg>`,
-    yer: `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#0ea5e9"/><path d="M 10 16 Q 16 12 22 14 T 28 26 Z" fill="#10b981"/></svg>`,
-    mars: `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#ef4444"/><circle cx="14" cy="16" r="4" fill="#b91c1c"/></svg>`,
-    yupiter: `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#f59e0b"/><path d="M 6 14 Q 20 10 34 14" fill="none" stroke="#b45309" stroke-width="2.5"/><ellipse cx="26" cy="22" rx="3" ry="2" fill="#ef4444"/></svg>`,
-    saturn: `<svg viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="19" ry="5.5" fill="none" stroke="#fef08a" stroke-width="3" transform="rotate(-15 20 20)"/><circle cx="20" cy="20" r="10" fill="#ffd700"/><path d="M 5 23 A 19 5.5 0 0 0 35 17" fill="none" stroke="#fef08a" stroke-width="3" transform="rotate(-15 20 20)"/></svg>`,
-    uran: `<svg viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="18" ry="4" fill="none" stroke="#93c5fd" stroke-width="1" transform="rotate(75 20 20)"/><circle cx="20" cy="20" r="11" fill="#38bdf8"/></svg>`,
-    neptun: `<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#1d4ed8"/><path d="M 6 18 Q 20 15 34 20" fill="none" stroke="#60a5fa" stroke-width="2"/></svg>`
+    merkuriy: `
+      <svg viewBox="0 0 100 100" class="planet-card-svg">
+        <circle cx="50" cy="50" r="38" fill="#94a3b8" />
+        <circle cx="34" cy="35" r="7" fill="#64748b" opacity="0.6" />
+        <circle cx="62" cy="64" r="9" fill="#64748b" opacity="0.6" />
+      </svg>
+    `,
+    venera: `
+      <svg viewBox="0 0 100 100" class="planet-card-svg">
+        <circle cx="50" cy="50" r="38" fill="#fef08a" />
+        <path d="M 16 42 Q 50 32 84 42" fill="none" stroke="#eab308" stroke-width="5" stroke-linecap="round" />
+        <path d="M 13 60 Q 50 68 87 60" fill="none" stroke="#eab308" stroke-width="5" stroke-linecap="round" />
+      </svg>
+    `,
+    yer: `
+      <svg viewBox="0 0 100 100" class="planet-card-svg">
+        <circle cx="50" cy="50" r="38" fill="#0ea5e9" />
+        <path d="M 24 38 Q 35 24 50 28 T 68 38 T 54 74 T 24 54 Z" fill="#10b981" />
+        <path d="M 18 45 Q 40 48 50 40 T 82 45" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.7" />
+      </svg>
+    `,
+    mars: `
+      <svg viewBox="0 0 100 100" class="planet-card-svg">
+        <circle cx="50" cy="50" r="38" fill="#ef4444" />
+        <circle cx="34" cy="42" r="8" fill="#b91c1c" />
+        <circle cx="64" cy="58" r="9" fill="#b91c1c" />
+        <path d="M 42 14 A 38 38 0 0 1 58 14 Z" fill="#ffffff" />
+      </svg>
+    `,
+    yupiter: `
+      <svg viewBox="0 0 100 100" class="planet-card-svg">
+        <circle cx="50" cy="50" r="38" fill="#f59e0b" />
+        <path d="M 13 32 Q 50 24 87 32" fill="none" stroke="#b45309" stroke-width="4.5" />
+        <path d="M 12 48 Q 50 56 88 48" fill="none" stroke="#fef08a" stroke-width="3.5" />
+        <ellipse cx="68" cy="57" rx="8" ry="5.5" fill="#ef4444" />
+      </svg>
+    `,
+    saturn: `
+      <svg viewBox="0 0 100 100" class="planet-card-svg">
+        <ellipse cx="50" cy="50" rx="49" ry="12" fill="none" stroke="#fef08a" stroke-width="6.5" transform="rotate(-15 50 50)" opacity="0.85" />
+        <circle cx="50" cy="50" r="24" fill="#ffd700" />
+        <path d="M 11 58 A 49 12 0 0 0 89 42" fill="none" stroke="#fef08a" stroke-width="6.5" transform="rotate(-15 50 50)"/>
+      </svg>
+    `,
+    uran: `
+      <svg viewBox="0 0 100 100" class="planet-card-svg">
+        <ellipse cx="50" cy="50" rx="44" ry="8" fill="none" stroke="#93c5fd" stroke-width="2.5" transform="rotate(75 50 50)" />
+        <circle cx="50" cy="50" r="26" fill="#38bdf8" />
+      </svg>
+    `,
+    neptun: `
+      <svg viewBox="0 0 100 100" class="planet-card-svg">
+        <circle cx="50" cy="50" r="38" fill="#1d4ed8" />
+        <path d="M 15 42 Q 50 35 85 45" fill="none" stroke="#60a5fa" stroke-width="4.5" />
+      </svg>
+    `
   };
 
   const initialPlanetsList = [
@@ -317,7 +365,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const slots = dropSlotsZone.querySelectorAll('.drop-slot');
     slots.forEach(slot => {
       slot.className = 'drop-slot';
-      // keep only original slot markers
       const num = slot.getAttribute('data-slot');
       slot.innerHTML = `
         <span class="slot-num">${num}</span>
@@ -397,10 +444,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (slotElement.classList.contains('correct-slot')) return;
 
     if (planetOrder === slotNum) {
-      // Correct! Lock inside slot
       slotElement.classList.add('correct-slot');
       
-      // Insert visual planet representation into slot
       slotElement.innerHTML = '';
       const key = element.getAttribute('data-key');
       const name = element.querySelector('span').textContent;
@@ -413,7 +458,6 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       slotElement.appendChild(lockedPlanet);
       
-      // Remove original drag card
       element.remove();
       
       // Update counters
@@ -432,13 +476,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
     } else {
-      // Wrong! Flash red on target slot and bounce element back
       slotElement.classList.add('wrong-slot');
       setTimeout(() => {
         slotElement.classList.remove('wrong-slot');
       }, 400);
       
-      // Simple shake effect on current dragged element if visible
       if (element) {
         element.style.transform = 'scale(0.9) translate(-10px, 0)';
         setTimeout(() => element.style.transform = '', 150);
@@ -446,34 +488,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // ==========================================================================
-  // MOBILE TOUCH-DRAGGING SIMULATION ENGINE
-  // ==========================================================================
+  // Mobile Touch dragging helper coords
   let touchStartCoords = { x: 0, y: 0 };
   let touchOffset = { x: 0, y: 0 };
   let activeTouchElement = null;
 
   function handleTouchStart(e) {
-    // Only drag if not already locked
     if (this.parentElement.classList.contains('drop-slot')) return;
     
     activeTouchElement = this;
     const touch = e.touches[0];
-    
-    // Store original viewport coords
     const rect = this.getBoundingClientRect();
+    
     touchStartCoords = {
       x: rect.left,
       y: rect.top
     };
     
-    // Store offsets relative to drag touch point
     touchOffset = {
       x: touch.clientX - rect.left,
       y: touch.clientY - rect.top
     };
     
-    // Style item as floating
     this.style.position = 'fixed';
     this.style.width = `${rect.width}px`;
     this.style.height = `${rect.height}px`;
@@ -485,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleTouchMove(e) {
     if (!activeTouchElement) return;
-    e.preventDefault(); // stop page scroll
+    e.preventDefault();
     
     const touch = e.touches[0];
     const newX = touch.clientX - touchOffset.x;
@@ -499,24 +535,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!activeTouchElement) return;
     
     const touch = e.changedTouches[0];
-    
-    // Hide item temporarily so we can find what's directly underneath it
     activeTouchElement.style.display = 'none';
     const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
     activeTouchElement.style.display = '';
     
-    // Find if target is a drop slot (or child of one)
     let slotElement = null;
     if (dropTarget) {
       slotElement = dropTarget.closest('.drop-slot');
     }
     
     if (slotElement && !slotElement.classList.contains('correct-slot')) {
-      // Slot target hit
       const planetOrder = parseInt(activeTouchElement.getAttribute('data-order'));
       const slotNum = parseInt(slotElement.getAttribute('data-slot'));
       
-      // Temporarily restore basic styling variables so verifyMatch can append clean node
       activeTouchElement.style.position = '';
       activeTouchElement.style.width = '';
       activeTouchElement.style.height = '';
@@ -528,7 +559,6 @@ document.addEventListener('DOMContentLoaded', () => {
       verifyMatch(activeTouchElement, planetOrder, slotElement, slotNum);
       
     } else {
-      // Returned to start since no matching target
       activeTouchElement.style.transition = 'all 0.3s ease-out';
       activeTouchElement.style.left = `${touchStartCoords.x}px`;
       activeTouchElement.style.top = `${touchStartCoords.y}px`;
@@ -549,30 +579,28 @@ document.addEventListener('DOMContentLoaded', () => {
     activeTouchElement = null;
   }
 
-  // Bind Reset button
   gameResetBtn.addEventListener('click', initDragDropGame);
-  
-  // Launch game
   initDragDropGame();
 
   // ==========================================================================
   // 6. QUIZ GAME ENGINE
   // ==========================================================================
   
+  // Custom framed mini solar system lineup illustration for the quiz questions
   const quizSVGs = {
     q1: `
       <svg viewBox="0 0 300 120" class="quiz-illus-svg">
-        <rect x="0" y="0" width="300" height="120" fill="rgba(255,255,255,0.3)" rx="12"/>
+        <rect x="0" y="0" width="300" height="120" fill="#0f172a" rx="16"/>
         <circle cx="10" cy="60" r="30" fill="#f59e0b" />
         <circle cx="70" cy="60" r="5" fill="#94a3b8" />
         <circle cx="95" cy="60" r="8" fill="#fef08a" />
         <circle cx="125" cy="60" r="10" fill="#0ea5e9" />
         <circle cx="155" cy="60" r="7" fill="#ef4444" />
-        <circle cx="190" cy="15" r="12" fill="#f59e0b" />
+        <circle cx="190" cy="60" r="15" fill="#f59e0b" />
         <ellipse cx="235" cy="60" rx="18" ry="5" fill="none" stroke="#fef08a" stroke-width="2" transform="rotate(-10 235 60)" />
         <circle cx="235" cy="60" r="11" fill="#ffd700" />
         <circle cx="270" cy="60" r="9" fill="#38bdf8" />
-        <line x1="10" y1="60" x2="300" y2="60" stroke="rgba(0,0,0,0.06)" stroke-width="1.5" stroke-dasharray="3,3" />
+        <line x1="10" y1="60" x2="300" y2="60" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" stroke-dasharray="3,3" />
       </svg>
     `,
     q2: `
@@ -608,7 +636,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </g>
         <path d="M 85 60 L 150 75" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="3,3" />
         <polygon points="152,78 142,75 148,69" fill="#7c3aed" />
-        <text x="120" y="46" fill="#7c3aed" font-size="11" font-family="Comfortaa" font-weight="bold">3-chi o'rin</text>
+        <text x="120" y="46" fill="#7c3aed" font-size="11" font-family="Comfortaa" font-weight="bold">3-chi o\'rin</text>
       </svg>
     `
   };
@@ -619,40 +647,40 @@ document.addEventListener('DOMContentLoaded', () => {
       question: 'Quyosh tizimida nechta sayyora bor?',
       options: ['7 ta', '8 ta', '9 ta', '10 ta'],
       correctIndex: 1, // 8 ta
-      correctText: '✅ To\'g\'ri! Zo\'r! Quyosh tizimida 8 ta asosiy sayyora bor.',
-      wrongText: '❌ Noto\'g\'ri. Quyosh tizimida jami 8 ta sayyora bor.'
+      correctText: '🎉 To\'g\'ri! +1 yulduz. Quyosh tizimida 8 ta asosiy sayyora bor.',
+      wrongText: '❌ Noto\'g\'ri, qayta urining! Quyosh tizimida jami 8 ta sayyora bor.'
     },
     {
       illusKey: 'q2',
       question: 'Quyosh tizimidagi eng katta sayyora qaysi?',
       options: ['Saturn', 'Yer', 'Yupiter', 'Neptun'],
       correctIndex: 2, // Yupiter
-      correctText: '✅ To\'g\'ri! Yupiter eng ulkan gaz gigantidir.',
-      wrongText: '❌ Noto\'g\'ri. Eng katta sayyora — Yupiter.'
+      correctText: '🎉 To\'g\'ri! +1 yulduz. Yupiter eng ulkan gaz gigantidir.',
+      wrongText: '❌ Noto\'g\'ri, qayta urining! Eng katta sayyora — Yupiter.'
     },
     {
       illusKey: 'q3',
       question: 'Bizning galaktika qanday nomlanadi?',
       options: ['Andromeda', 'Perseus', 'Somon Yo\'li', 'Magellan buluti'],
       correctIndex: 2, // Somon Yo'li
-      correctText: '✅ To\'g\'ri! Biz yashaydigan galaktika "Somon Yo\'li" (Milky Way) deb ataladi.',
-      wrongText: '❌ Noto\'g\'ri. Bizning ulkan kosmik uyimiz "Somon Yo\'li" galaktikasi deb ataladi.'
+      correctText: '🎉 To\'g\'ri! +1 yulduz. Biz yashaydigan galaktika "Somon Yo\'li" (Milky Way) deb ataladi.',
+      wrongText: '❌ Noto\'g\'ri, qayta urining! Bizning ulkan kosmik uyimiz "Somon Yo\'li" galaktikasidir.'
     },
     {
       illusKey: 'q4',
       question: 'Qaysi sayyorada keng va ko\'rinadigan halqa bor?',
       options: ['Mars', 'Yer', 'Saturn', 'Venera'],
       correctIndex: 2, // Saturn
-      correctText: '✅ To\'g\'ri! Saturn o\'zining yorqin va ulkan halqalari bilan mashhur.',
-      wrongText: '❌ Noto\'g\'ri. Chiroyli halqalari bor eng mashhur sayyora — Saturn.'
+      correctText: '🎉 To\'g\'ri! +1 yulduz. Saturn o\'zining yorqin va ulkan halqalari bilan mashhur.',
+      wrongText: '❌ Noto\'g\'ri, qayta urining! Chiroyli halqalari bor eng mashhur sayyora — Saturn.'
     },
     {
       illusKey: 'q5',
       question: 'Yer Quyoshdan nechanchi sayyora?',
       options: ['1-chi', '2-chi', '3-chi', '4-chi'],
       correctIndex: 2, // 3-chi
-      correctText: '✅ To\'g\'ri! Yerimiz Quyoshdan uchinchi o\'rinda joylashgan ko\'k sayyora.',
-      wrongText: '❌ Noto\'g\'ri. Yer Quyoshdan uchinchi o\'rindagi sayyoradir.'
+      correctText: '🎉 To\'g\'ri! +1 yulduz. Yerimiz Quyoshdan uchinchi o\'rinda joylashgan ko\'k sayyora.',
+      wrongText: '❌ Noto\'g\'ri, qayta urining! Yer Quyoshdan uchinchi o\'rindagi sayyora.'
     }
   ];
 
@@ -676,6 +704,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const currentQ = quizQuestions[index];
     questionBadgeEl.textContent = `Savol ${index + 1} / 5`;
+    
+    // Always use the lineups SVG as a hint helper for Q1 and other questions
     quizIllusContainer.innerHTML = quizSVGs[currentQ.illusKey];
     questionTextEl.textContent = currentQ.question;
     
@@ -708,6 +738,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (selectedIdx === correctIdx) {
       selectedBtn.classList.add('correct');
+      
+      // Increment Score
       quizScore++;
       scoreCounter.textContent = quizScore;
       
@@ -761,10 +793,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const retryBtn = document.getElementById('retry-btn');
   const relearnBtn = document.getElementById('relearn-btn');
 
-  // SVGs of astronaut poses for light results card
+  // SVGs of astronaut poses for results card
   const resultsAstronautPoses = {
     celebrating: `
       <svg viewBox="0 0 150 180" xmlns="http://www.w3.org/2000/svg" class="astronaut-svg mascot-celebrate">
+        <!-- Celebrating hands raised -->
         <path d="M 45 80 Q 25 50 15 25 C 12 20 22 15 28 20 Q 38 42 48 70 Z" fill="#ffffff" stroke="#ced4da" stroke-width="1.5"/>
         <circle cx="15" cy="22" r="6.5" fill="#f97316"/>
         <path d="M 105 80 Q 125 50 135 25 C 138 20 128 15 122 20 Q 112 42 102 70 Z" fill="#ffffff" stroke="#ced4da" stroke-width="1.5"/>
@@ -858,7 +891,7 @@ document.addEventListener('DOMContentLoaded', () => {
       resultMsgEl.textContent = "Zo'r! Siz koinot haqida hamma narsani bilasiz. Haqiqiy astronavt bo'lishga tayyor bo'lgan yosh olim!";
       resultAstronautSvg.innerHTML = resultsAstronautPoses.celebrating;
       
-      // Full celebratory confetti shower
+      // Confetti shower
       triggerConfettiRain();
       triggerConfettiRain();
       
@@ -877,7 +910,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resultsSection.scrollIntoView({ behavior: 'smooth' });
 
-    // Count-up animation
+    // Count-up
     let currentCount = 0;
     finalScoreNum.textContent = '0';
     
