@@ -143,14 +143,44 @@ document.addEventListener('DOMContentLoaded', () => {
   const planetModal = document.getElementById('planet-modal');
   const modalCloseBtn = document.getElementById('modal-close-btn');
   
-  const modalEmoji = document.getElementById('modal-emoji-el');
+  const modalImgWrap = document.getElementById('modal-img-wrap-el');
   const modalTitle = document.getElementById('modal-title-el');
   const modalOrder = document.getElementById('modal-order-el');
   const modalFactsList = document.getElementById('modal-facts-el');
 
+  // Map of planet keys → real image src (relative to root)
+  const planetImgSrc = {
+    merkuriy: 'images/mercury.png',
+    venera:   'images/venus.png',
+    yer:      'images/earth.png',
+    mars:     'images/mars.png',
+    yupiter:  'images/jupiter.png',
+    saturn:   'images/saturn.png',
+    uran:     'images/uranus.jpg',
+    neptun:   null   // no real photo – uses decorative SVG fallback
+  };
+
+  const neptuneSVG = `<svg viewBox="0 0 100 100" class="modal-planet-svg" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="np-modal" cx="35%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="#60a5fa"/>
+        <stop offset="40%" stop-color="#2563eb"/>
+        <stop offset="100%" stop-color="#1e3a8a"/>
+      </radialGradient>
+      <clipPath id="np-modal-clip"><circle cx="50" cy="50" r="48"/></clipPath>
+    </defs>
+    <circle cx="50" cy="50" r="48" fill="url(#np-modal)"/>
+    <g clip-path="url(#np-modal-clip)">
+      <path d="M 4 36 Q 25 28 50 32 Q 75 36 96 32" fill="none" stroke="#93c5fd" stroke-width="3.5" opacity="0.5"/>
+      <path d="M 4 50 Q 30 42 50 48 Q 70 54 96 48" fill="none" stroke="#60a5fa" stroke-width="5" opacity="0.4"/>
+      <path d="M 4 64 Q 30 58 50 62 Q 72 66 96 62" fill="none" stroke="#93c5fd" stroke-width="3" opacity="0.35"/>
+      <ellipse cx="65" cy="40" rx="12" ry="6" fill="#1d4ed8" opacity="0.6" transform="rotate(-8 65 40)"/>
+    </g>
+    <ellipse cx="35" cy="32" rx="14" ry="8" fill="white" opacity="0.07" transform="rotate(-20 35 32)"/>
+  </svg>`;
+
   const planetDetails = {
     merkuriy: {
-      emoji: '🪐',
       title: 'Merkuriy',
       order: 'Quyoshdan 1-chi sayyora',
       color: '#94a3b8',
@@ -161,18 +191,16 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     venera: {
-      emoji: '🪐',
       title: 'Venera',
       order: 'Quyoshdan 2-chi sayyora',
       color: '#f59e0b',
       facts: [
         'Koinotdagi eng issiq sayyora! Harorat doimo 465°C darajani tashkil etadi.',
-        'O\'z o\'qi atrofida boshqa bacha sayyoralarga teskari tomonga aylanadi.',
+        'O\'z o\'qi atrofida boshqa sayyoralarga teskari tomonga aylanadi.',
         'Osmonda juda yorqin porlaydi, shuning uchun uni ba\'zan "Tong yulduzi" deyishadi.'
       ]
     },
     yer: {
-      emoji: '🌍',
       title: 'Yer',
       order: 'Quyoshdan 3-chi sayyora',
       color: '#0ea5e9',
@@ -183,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     mars: {
-      emoji: '🪐',
       title: 'Mars',
       order: 'Quyoshdan 4-chi sayyora',
       color: '#ef4444',
@@ -194,10 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     yupiter: {
-      emoji: '🪐',
       title: 'Yupiter',
       order: 'Quyoshdan 5-chi sayyora',
-      color: '#f59e0b',
+      color: '#b45309',
       facts: [
         'Quyosh tizimidagi eng katta va eng og\'ir gigant sayyoradir.',
         'Undagi "Katta Qizil Dog\'" — bu 350 yildan ortiq vaqtdan beri tinmagan ulkan bo\'ronga teng.',
@@ -205,18 +231,16 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     saturn: {
-      emoji: '🪐',
       title: 'Saturn',
       order: 'Quyoshdan 6-chi sayyora',
-      color: '#ffd700',
+      color: '#b8860b',
       facts: [
-        'O\'zining ajoyib keng va yorqin halqalari bilan koinotnng eng go\'zal sayyorasidir.',
+        'O\'zining ajoyib keng va yorqin halqalari bilan koinotning eng go\'zal sayyorasidir.',
         'Halqalar asosan muz bo\'laklari, changlar va toshlardan tashkil topgan.',
         'Hozirgi kunda Saturn atrofida aylanuvchi 82 ta oy aniqlangan.'
       ]
     },
     uran: {
-      emoji: '🪐',
       title: 'Uran',
       order: 'Quyoshdan 7-chi sayyora',
       color: '#38bdf8',
@@ -227,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     neptun: {
-      emoji: '🪐',
       title: 'Neptun',
       order: 'Quyoshdan 8-chi sayyora',
       color: '#1d4ed8',
@@ -244,7 +267,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const key = item.getAttribute('data-planet');
       const details = planetDetails[key];
       if (details) {
-        modalEmoji.textContent = details.emoji;
+        // Show real planet image (or SVG fallback for neptun)
+        const imgSrc = planetImgSrc[key];
+        if (imgSrc) {
+          modalImgWrap.innerHTML = `<img src="${imgSrc}" alt="${details.title}" class="modal-planet-real-img">`;
+        } else {
+          modalImgWrap.innerHTML = neptuneSVG;
+        }
+
         modalTitle.textContent = details.title;
         modalOrder.textContent = details.order;
         planetModal.style.setProperty('--modal-accent', details.color);
@@ -274,62 +304,31 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. THE DRAG AND DROP PLANETS GAME
   // ==========================================================================
   
-  // CRITICAL FIX: Mini SVGs of actual detailed cartoon planets for drag game pills
+  // Real planet images for drag game pills (img tags for 6 real photos, SVG for neptun)
   const planetGameIcons = {
-    merkuriy: `
-      <svg viewBox="0 0 100 100" class="planet-card-svg">
-        <circle cx="50" cy="50" r="38" fill="#94a3b8" />
-        <circle cx="34" cy="35" r="7" fill="#64748b" opacity="0.6" />
-        <circle cx="62" cy="64" r="9" fill="#64748b" opacity="0.6" />
-      </svg>
-    `,
-    venera: `
-      <svg viewBox="0 0 100 100" class="planet-card-svg">
-        <circle cx="50" cy="50" r="38" fill="#fef08a" />
-        <path d="M 16 42 Q 50 32 84 42" fill="none" stroke="#eab308" stroke-width="5" stroke-linecap="round" />
-        <path d="M 13 60 Q 50 68 87 60" fill="none" stroke="#eab308" stroke-width="5" stroke-linecap="round" />
-      </svg>
-    `,
-    yer: `
-      <svg viewBox="0 0 100 100" class="planet-card-svg">
-        <circle cx="50" cy="50" r="38" fill="#0ea5e9" />
-        <path d="M 24 38 Q 35 24 50 28 T 68 38 T 54 74 T 24 54 Z" fill="#10b981" />
-        <path d="M 18 45 Q 40 48 50 40 T 82 45" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.7" />
-      </svg>
-    `,
-    mars: `
-      <svg viewBox="0 0 100 100" class="planet-card-svg">
-        <circle cx="50" cy="50" r="38" fill="#ef4444" />
-        <circle cx="34" cy="42" r="8" fill="#b91c1c" />
-        <circle cx="64" cy="58" r="9" fill="#b91c1c" />
-        <path d="M 42 14 A 38 38 0 0 1 58 14 Z" fill="#ffffff" />
-      </svg>
-    `,
-    yupiter: `
-      <svg viewBox="0 0 100 100" class="planet-card-svg">
-        <circle cx="50" cy="50" r="38" fill="#f59e0b" />
-        <path d="M 13 32 Q 50 24 87 32" fill="none" stroke="#b45309" stroke-width="4.5" />
-        <path d="M 12 48 Q 50 56 88 48" fill="none" stroke="#fef08a" stroke-width="3.5" />
-        <ellipse cx="68" cy="57" rx="8" ry="5.5" fill="#ef4444" />
-      </svg>
-    `,
-    saturn: `
-      <svg viewBox="0 0 100 100" class="planet-card-svg">
-        <ellipse cx="50" cy="50" rx="49" ry="12" fill="none" stroke="#fef08a" stroke-width="6.5" transform="rotate(-15 50 50)" opacity="0.85" />
-        <circle cx="50" cy="50" r="24" fill="#ffd700" />
-        <path d="M 11 58 A 49 12 0 0 0 89 42" fill="none" stroke="#fef08a" stroke-width="6.5" transform="rotate(-15 50 50)"/>
-      </svg>
-    `,
-    uran: `
-      <svg viewBox="0 0 100 100" class="planet-card-svg">
-        <ellipse cx="50" cy="50" rx="44" ry="8" fill="none" stroke="#93c5fd" stroke-width="2.5" transform="rotate(75 50 50)" />
-        <circle cx="50" cy="50" r="26" fill="#38bdf8" />
-      </svg>
-    `,
+    merkuriy: `<img src="images/mercury.png" alt="Merkuriy" class="drag-planet-real-img">`,
+    venera:   `<img src="images/venus.png"   alt="Venera"   class="drag-planet-real-img">`,
+    yer:      `<img src="images/earth.png"   alt="Yer"      class="drag-planet-real-img">`,
+    mars:     `<img src="images/mars.png"    alt="Mars"     class="drag-planet-real-img">`,
+    yupiter:  `<img src="images/jupiter.png" alt="Yupiter"  class="drag-planet-real-img">`,
+    saturn:   `<img src="images/saturn.png"  alt="Saturn"   class="drag-planet-real-img drag-planet-saturn">`,
+    uran:     `<img src="images/uranus.jpg"  alt="Uran"     class="drag-planet-real-img">`,
     neptun: `
-      <svg viewBox="0 0 100 100" class="planet-card-svg">
-        <circle cx="50" cy="50" r="38" fill="#1d4ed8" />
-        <path d="M 15 42 Q 50 35 85 45" fill="none" stroke="#60a5fa" stroke-width="4.5" />
+      <svg viewBox="0 0 100 100" class="drag-planet-real-img" style="border-radius:50%;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="np-drag" cx="35%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#60a5fa"/>
+            <stop offset="40%" stop-color="#2563eb"/>
+            <stop offset="100%" stop-color="#1e3a8a"/>
+          </radialGradient>
+          <clipPath id="np-drag-clip"><circle cx="50" cy="50" r="48"/></clipPath>
+        </defs>
+        <circle cx="50" cy="50" r="48" fill="url(#np-drag)"/>
+        <g clip-path="url(#np-drag-clip)">
+          <path d="M 4 38 Q 25 30 50 34 Q 75 38 96 34" fill="none" stroke="#93c5fd" stroke-width="3" opacity="0.5"/>
+          <path d="M 4 52 Q 30 44 50 50 Q 70 56 96 50" fill="none" stroke="#60a5fa" stroke-width="4" opacity="0.4"/>
+          <ellipse cx="65" cy="40" rx="10" ry="5" fill="#1d4ed8" opacity="0.6" transform="rotate(-8 65 40)"/>
+        </g>
       </svg>
     `
   };

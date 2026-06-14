@@ -661,7 +661,7 @@ section {
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-/* Planet cards SVGs dimensions (CRITICAL FIX: images were empty) */
+/* Planet cards real image container */
 .planet-circle-container {
   width: 100%;
   max-width: 90px;
@@ -670,7 +670,33 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   transition: transform var(--transition-fast);
+}
+
+/* Saturn's container needs to be wider to show rings */
+.planet-circle-saturn {
+  max-width: 110px;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+/* Real planet photo inside card */
+.planet-real-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Saturn photo override — keep aspect ratio, show full rings */
+.planet-img-saturn {
+  width: 110px;
+  height: 110px;
+  border-radius: 12px;
+  object-fit: contain;
 }
 
 .planet-card-svg {
@@ -692,6 +718,10 @@ section {
 
 .planet-card-item-light:hover .planet-circle-container {
   transform: scale(1.08) rotate(5deg);
+}
+
+.planet-card-item-light:hover .planet-circle-saturn {
+  transform: scale(1.08);
 }
 
 /* ==========================================================================
@@ -777,13 +807,30 @@ section {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Draggable planets mini-illustrations (CRITICAL FIX: no simple dots) */
+/* Draggable planets — real photo icons */
 .draggable-planet-icon {
-  width: 28px;
-  height: 28px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Real img inside the drag pill */
+.drag-planet-real-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Saturn drag pill: contain so rings are visible */
+.drag-planet-saturn {
+  border-radius: 6px;
+  object-fit: contain;
+  background: transparent;
 }
 
 .draggable-planet-icon svg {
@@ -1504,6 +1551,31 @@ section {
 .modal-planet-emoji-light {
   font-size: 52px;
   margin-bottom: 8px;
+}
+
+/* Real planet image shown in modal popup */
+.modal-planet-img-wrap {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 16px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-planet-real-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.modal-planet-svg {
+  width: 140px;
+  height: 140px;
+  display: block;
 }
 
 .modal-planet-title-light {
